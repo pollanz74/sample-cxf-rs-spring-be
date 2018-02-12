@@ -1,0 +1,40 @@
+<jboss-deployment-structure xmlns="urn:jboss:deployment-structure:1.2">
+    <deployment>
+        <exclude-subsystems>
+            <subsystem name="jaxrs"/>
+            <subsystem name="jpa" />
+            <subsystem name="resteasy"/>
+        </exclude-subsystems>
+        <exclusions>
+            <module name="javaee.api"/>
+            <module name="javax.persistence.api"/>
+            <module name="javax.ws.rs.api"/>
+            <module name="org.apache.cxf"/>
+            <module name="org.apache.cxf.impl"/>
+            <module name="org.hibernate"/>
+        </exclusions>
+        <dependencies>
+            <module name="javax.jws.api"/>
+            <module name="javax.annotation.api"/>
+            <module name="javax.el.api"/>
+            <module name="javax.enterprise.api"/>
+            <!--module name="javax.enterprise.deploy.api"/-->
+            <module name="javax.inject.api"/>
+            <module name="javax.interceptor.api"/>
+            <module name="javax.management.j2ee.api"/>
+            <module name="javax.resource.api"/>
+            <module name="javax.security.auth.message.api"/>
+            <module name="javax.servlet.api"/>
+            <module name="javax.transaction.api"/>
+            <module name="javax.validation.api"/>
+            <!--module name="javax.xml.bind.api"/-->
+            <!--module name="javax.xml.registry.api"/-->
+            <!--module name="javax.xml.bind.api" export="true"/-->
+            <!--module name="javax.xml.registry.api" export="true"/-->
+            <!--module name="javax.xml.soap.api" export="true"/-->
+            <!--module name="javax.xml.ws.api" export="true"/-->
+            <!-- sempre per ultimo -->
+            <module name="javax.api" export="true"/>
+        </dependencies>
+    </deployment>
+</jboss-deployment-structure>
