@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.pollanz.samples</groupId>
@@ -14,6 +14,7 @@
         <spring.platform.bom.version>Brussels-SR5</spring.platform.bom.version>
         <cxf.version>3.1.13</cxf.version>
         <commons-collections.version>4.1</commons-collections.version>
+        <jboss-logging.version>3.3.0.Final</jboss-logging.version>
     </properties>
 
     <name>Sample REST Backend Application :: ${project.artifactId} (${project.packaging})</name>
@@ -85,6 +86,12 @@
                 <artifactId>commons-collections4</artifactId>
                 <version>${commons-collections.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.jboss.logging</groupId>
+                <artifactId>jboss-logging</artifactId>
+                <version>${jboss-logging.version}</version>
+                <scope>provided</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -138,10 +145,16 @@
 
     <profiles>
         <profile>
-        <id>jetty-local</id>
-        <properties>
-            <build.profile.id>jetty-local</build.profile.id>
-        </properties>
+            <id>jetty-local</id>
+            <properties>
+                <build.profile.id>jetty-local</build.profile.id>
+            </properties>
+            <dependencies>
+                <dependency>
+                    <groupId>ch.qos.logback</groupId>
+                    <artifactId>logback-classic</artifactId>
+                </dependency>
+            </dependencies>
         </profile>
     </profiles>
 
