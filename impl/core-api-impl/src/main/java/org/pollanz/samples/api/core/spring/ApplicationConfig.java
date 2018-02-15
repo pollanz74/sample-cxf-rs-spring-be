@@ -42,7 +42,7 @@ public class ApplicationConfig {
     public Server jaxrsServer() {
         JAXRSServerFactoryBean jaxrsServerFactoryBean = new JAXRSServerFactoryBean();
         jaxrsServerFactoryBean.setBus(cxf());
-        jaxrsServerFactoryBean.setAddress(env.getProperty("sample.core.jaxrsServer.address", "/"));
+        jaxrsServerFactoryBean.setAddress(env.getProperty("sample_core_jaxrsServer_address", "/"));
         jaxrsServerFactoryBean.setServiceBeans(Arrays.<Object>asList(
                 apiListingResource(),
                 widgetApi()
@@ -62,14 +62,14 @@ public class ApplicationConfig {
         Swagger2Feature swagger2Feature = new Swagger2Feature();
         swagger2Feature.setResourcePackage("org.pollanz.samples");
         swagger2Feature.setBasePath("/core/rest");
-        swagger2Feature.setVersion(env.getProperty("sample.core.swagger.version", StringUtils.EMPTY));
-        swagger2Feature.setTitle(env.getProperty("sample.core.swagger.title", StringUtils.EMPTY));
-        swagger2Feature.setDescription(env.getProperty("sample.core.swagger.description", StringUtils.EMPTY));
+        swagger2Feature.setVersion(env.getProperty("sample_core_swagger_version", StringUtils.EMPTY));
+        swagger2Feature.setTitle(env.getProperty("sample_core_swagger_title", StringUtils.EMPTY));
+        swagger2Feature.setDescription(env.getProperty("sample_core_swagger_description", StringUtils.EMPTY));
         swagger2Feature.setScan(true);
         swagger2Feature.setScanAllResources(true);
-        swagger2Feature.setContact(env.getProperty("da.core.swagger.contact", StringUtils.EMPTY));
-        swagger2Feature.setLicense(env.getProperty("da.core.swagger.license", StringUtils.EMPTY));
-        swagger2Feature.setLicenseUrl(env.getProperty("da.core.swagger.licenseUrl", StringUtils.EMPTY));
+        swagger2Feature.setContact(env.getProperty("sample_core_swagger_contact", StringUtils.EMPTY));
+        swagger2Feature.setLicense(env.getProperty("sample_core_swagger_license", StringUtils.EMPTY));
+        swagger2Feature.setLicenseUrl(env.getProperty("sample_core_swagger_licenseUrl", StringUtils.EMPTY));
         return swagger2Feature;
     }
 

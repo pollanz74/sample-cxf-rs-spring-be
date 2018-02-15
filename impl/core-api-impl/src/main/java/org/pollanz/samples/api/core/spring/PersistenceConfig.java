@@ -57,11 +57,11 @@ public class PersistenceConfig {
     @Bean(name = "additionalProperties")
     Properties additionalProperties() {
         Properties properties = new Properties();
-        properties.setProperty("hibernate.hbm2ddl.auto", env.getProperty("sample.core.hibernate.hbm2ddl.auto", StringUtils.EMPTY));
-        properties.setProperty("hibernate.show_sql", env.getProperty("sample.core.hibernate.show_sql", Boolean.FALSE.toString()));
-        properties.setProperty("hibernate.dialect", env.getProperty("sample.core.hibernate.dialect"));
-        properties.setProperty("hibernate.transaction.manager_lookup_class", env.getProperty("sample.core.hibernate.transaction.manager_lookup_class"));
-        properties.setProperty("hibernate.id.new_generator_mappings", env.getProperty("sample.core.hibernate.id.new_generator_mappings", Boolean.FALSE.toString()));
+        properties.setProperty("hibernate.hbm2ddl.auto", env.getProperty("sample_core_hibernate_hbm2ddl_auto", StringUtils.EMPTY));
+        properties.setProperty("hibernate.show_sql", env.getProperty("sample_core_hibernate_show_sql", Boolean.FALSE.toString()));
+        properties.setProperty("hibernate.dialect", env.getProperty("sample_core_hibernate_dialect"));
+        properties.setProperty("hibernate.transaction.manager_lookup_class", env.getProperty("sample_core_hibernate_transaction_manager_lookup_class"));
+        properties.setProperty("hibernate.id.new_generator_mappings", env.getProperty("sample_core_hibernate_id_new_generator_mappings", Boolean.FALSE.toString()));
         return properties;
     }
 }

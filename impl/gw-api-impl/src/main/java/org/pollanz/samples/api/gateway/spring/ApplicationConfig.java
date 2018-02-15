@@ -43,7 +43,7 @@ public class ApplicationConfig {
     public Server jaxrsServer() {
         JAXRSServerFactoryBean jaxrsServerFactoryBean = new JAXRSServerFactoryBean();
         jaxrsServerFactoryBean.setBus(cxf());
-        jaxrsServerFactoryBean.setAddress(env.getProperty("sample.gateway.jaxrsServer.address", "/"));
+        jaxrsServerFactoryBean.setAddress(env.getProperty("sample_gateway_jaxrsServer_address", "/"));
         jaxrsServerFactoryBean.setServiceBeans(Arrays.<Object>asList(
                 apiListingResource(),
                 widgetProxyApi()
@@ -62,14 +62,14 @@ public class ApplicationConfig {
         Swagger2Feature swagger2Feature = new Swagger2Feature();
         swagger2Feature.setResourcePackage("org.pollanz.samples.api.gateway");
         swagger2Feature.setBasePath("/sample-gateway/rest");
-        swagger2Feature.setVersion(env.getProperty("sample.gateway.swagger.version", StringUtils.EMPTY));
-        swagger2Feature.setTitle(env.getProperty("sample.gateway.swagger.title", StringUtils.EMPTY));
-        swagger2Feature.setDescription(env.getProperty("sample.gateway.swagger.description", StringUtils.EMPTY));
+        swagger2Feature.setVersion(env.getProperty("sample_gateway_swagger_version", StringUtils.EMPTY));
+        swagger2Feature.setTitle(env.getProperty("sample_gateway_swagger_title", StringUtils.EMPTY));
+        swagger2Feature.setDescription(env.getProperty("sample_gateway_swagger_description", StringUtils.EMPTY));
         swagger2Feature.setScan(true);
         swagger2Feature.setScanAllResources(true);
-        swagger2Feature.setContact(env.getProperty("da.gateway.swagger.contact", StringUtils.EMPTY));
-        swagger2Feature.setLicense(env.getProperty("da.gateway.swagger.license", StringUtils.EMPTY));
-        swagger2Feature.setLicenseUrl(env.getProperty("da.gateway.swagger.licenseUrl", StringUtils.EMPTY));
+        swagger2Feature.setContact(env.getProperty("sample_gateway_swagger_contact", StringUtils.EMPTY));
+        swagger2Feature.setLicense(env.getProperty("sample_gateway_swagger_license", StringUtils.EMPTY));
+        swagger2Feature.setLicenseUrl(env.getProperty("sample_gateway_swagger_licenseUrl", StringUtils.EMPTY));
         return swagger2Feature;
     }
 
@@ -92,7 +92,7 @@ public class ApplicationConfig {
 
     private <T> T create(String contextPath, Class<T> clazz) {
         return JAXRSClientFactory.create(
-                env.getProperty("sample.gateway.jaxrsClient.address").concat(contextPath).concat("/rest/"),
+                env.getProperty("sample_gateway_jaxrsClient_address").concat(contextPath).concat("/rest/"),
                 clazz,
                 providers()
         );
