@@ -7,7 +7,6 @@ import org.pollanz.samples.api.core.pojo.enumeration.Status;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 
 @Getter
 @Setter

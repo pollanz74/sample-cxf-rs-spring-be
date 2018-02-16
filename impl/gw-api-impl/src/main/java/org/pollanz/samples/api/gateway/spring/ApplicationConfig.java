@@ -11,13 +11,14 @@ import org.apache.cxf.jaxrs.JAXRSServerFactoryBean;
 import org.apache.cxf.jaxrs.client.JAXRSClientFactory;
 import org.apache.cxf.jaxrs.swagger.Swagger2Feature;
 import org.pollanz.samples.api.core.PetApi;
+import org.pollanz.samples.api.gateway.core.UserApi;
 import org.pollanz.samples.api.gateway.core.proxy.PetProxiedApi;
 import org.pollanz.samples.api.gateway.impl.GatewayExceptionProvider;
+import org.pollanz.samples.api.gateway.impl.core.UserApiServiceImpl;
 import org.pollanz.samples.api.gateway.impl.core.proxy.PetProxiedApiServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.core.env.Environment;
 
 import javax.ws.rs.core.MediaType;
@@ -46,7 +47,8 @@ public class ApplicationConfig {
         jaxrsServerFactoryBean.setAddress(env.getProperty("sample_gateway_jaxrsServer_address", "/"));
         jaxrsServerFactoryBean.setServiceBeans(Arrays.<Object>asList(
                 apiListingResource(),
-                widgetProxyApi()
+                widgetProxyApi(),
+                userApi()
         ));
         jaxrsServerFactoryBean.setExtensionMappings(extensionMappings());
         jaxrsServerFactoryBean.setProviders(providers());
@@ -94,7 +96,10 @@ public class ApplicationConfig {
         return JAXRSClientFactory.create(
                 env.getProperty("sample_gateway_jaxrsClient_address").concat(contextPath).concat("/rest/"),
                 clazz,
-                providers()
+                providers(),
+                "integration",
+                "password2",
+                null
         );
     }
 
@@ -104,7 +109,11 @@ public class ApplicationConfig {
     }
 
     @Bean
-    @DependsOn("cxf")
+    public UserApi userApi() {
+        return new UserApiServiceImpl();
+    }
+
+    @Bean
     public PetProxiedApi widgetProxyApi() {
         return new PetProxiedApiServiceImpl(proxiedWidgetApi());
     }

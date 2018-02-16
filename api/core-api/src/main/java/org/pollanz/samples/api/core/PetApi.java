@@ -21,8 +21,8 @@ public interface PetApi {
 
     @POST
     @Path("/")
-    @Consumes({ MediaType.APPLICATION_JSON })
-    @Produces({ MediaType.APPLICATION_JSON })
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
     @ApiOperation(value = "Add a new pet to the store", tags = {"pet",})
     @ApiResponses(value = {
             @ApiResponse(code = 405, message = "Invalid input")})
@@ -30,7 +30,7 @@ public interface PetApi {
 
     @DELETE
     @Path("/{petId}")
-    @Produces({ MediaType.APPLICATION_JSON })
+    @Produces({MediaType.APPLICATION_JSON})
     @ApiOperation(value = "Deletes a pet", tags = {"pet",})
     @ApiResponses(value = {
             @ApiResponse(code = 400, message = "Invalid ID supplied"),
@@ -39,7 +39,7 @@ public interface PetApi {
 
     @GET
     @Path("/findByStatus")
-    @Produces({ MediaType.APPLICATION_JSON })
+    @Produces({MediaType.APPLICATION_JSON})
     @ApiOperation(value = "Finds Pets by status", tags = {"pet",})
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "successful operation", response = PetPojo.class, responseContainer = "List"),
@@ -48,7 +48,7 @@ public interface PetApi {
 
     @GET
     @Path("/findByTags")
-    @Produces({ MediaType.APPLICATION_JSON })
+    @Produces({MediaType.APPLICATION_JSON})
     @ApiOperation(value = "Finds Pets by tags", tags = {"pet",})
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "successful operation", response = PetPojo.class, responseContainer = "List"),
@@ -57,7 +57,7 @@ public interface PetApi {
 
     @GET
     @Path("/{petId}")
-    @Produces({ MediaType.APPLICATION_JSON })
+    @Produces({MediaType.APPLICATION_JSON})
     @ApiOperation(value = "Find pet by ID", tags = {"pet",})
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "successful operation", response = PetPojo.class),
@@ -67,8 +67,8 @@ public interface PetApi {
 
     @PUT
     @Path("/")
-    @Consumes({ MediaType.APPLICATION_JSON })
-    @Produces({ MediaType.APPLICATION_JSON })
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
     @ApiOperation(value = "Update an existing pet", tags = {"pet",})
     @ApiResponses(value = {
             @ApiResponse(code = 400, message = "Invalid ID supplied"),

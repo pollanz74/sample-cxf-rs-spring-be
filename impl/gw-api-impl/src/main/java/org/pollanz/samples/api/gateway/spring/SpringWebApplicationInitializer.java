@@ -1,26 +1,25 @@
 package org.pollanz.samples.api.gateway.spring;
 
 import org.apache.cxf.transport.servlet.CXFServlet;
-import org.springframework.web.WebApplicationInitializer;
-import org.springframework.web.context.ContextLoaderListener;
-import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
+import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
-public class SpringWebApplicationInitializer implements WebApplicationInitializer {
+public class SpringWebApplicationInitializer extends AbstractSecurityWebApplicationInitializer {
 
-    @Override
-    public void onStartup(ServletContext servletContext) throws ServletException {
-        AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
-        rootContext.register(
+    public SpringWebApplicationInitializer() {
+        super(
+                SecurityConfig.class,
                 ApplicationConfig.class,
                 AspectConfig.class,
                 CacheConfig.class
         );
+    }
 
-        servletContext.addListener(new ContextLoaderListener(rootContext));
+    @Override
+    protected void afterSpringSecurityFilterChain(ServletContext servletContext) {
+        super.afterSpringSecurityFilterChain(servletContext);
         ServletRegistration.Dynamic dispatcher = servletContext.addServlet("CXFServlet", new CXFServlet());
         dispatcher.setLoadOnStartup(1);
         dispatcher.addMapping("/rest/*");

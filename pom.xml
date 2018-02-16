@@ -15,6 +15,7 @@
         <cxf.version>3.1.13</cxf.version>
         <commons-collections.version>4.1</commons-collections.version>
         <jboss-logging.version>3.3.0.Final</jboss-logging.version>
+        <jjwt.version>0.9.0</jjwt.version>
     </properties>
 
     <name>Sample REST Backend Application :: ${project.artifactId} (${project.packaging})</name>
@@ -85,6 +86,11 @@
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-collections4</artifactId>
                 <version>${commons-collections.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>${jjwt.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.jboss.logging</groupId>

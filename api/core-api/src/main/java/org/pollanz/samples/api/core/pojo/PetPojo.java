@@ -4,9 +4,6 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.pollanz.samples.api.core.pojo.enumeration.Status;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Data
 public class PetPojo {
 
