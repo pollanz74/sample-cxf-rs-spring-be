@@ -13,10 +13,11 @@ import java.io.Serializable;
 @EqualsAndHashCode(of = {"id"})
 @Entity
 @Table(name = "PET_TB")
+@SequenceGenerator(name="pet_sequence",sequenceName="PET_SEQ")
 public class Pet implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(generator="pet_sequence")
     private Long id;
 
     @Column(name = "NAME", nullable = false, unique = true)

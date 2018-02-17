@@ -12,8 +12,8 @@
 
     <changeSet id="00000000000001" author="pollanz74">
 
-        <createSequence incrementBy="1"
-                        sequenceName="PET_SEQUENCE"
+        <createSequence incrementBy="50"
+                        sequenceName="PET_SEQ"
                         startValue="1"/>
 
         <createTable tableName="PET_TB">

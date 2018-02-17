@@ -1,5 +1,6 @@
 package org.pollanz.samples.api.core.spring;
 
+import liquibase.integration.spring.SpringLiquibase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,6 +22,14 @@ public class DataSourceConfig {
                 .generateUniqueName(true)
                 .setType(EmbeddedDatabaseType.H2)
                 .build();
+    }
+
+    @Bean
+    public SpringLiquibase liquibase() {
+        SpringLiquibase liquibase = new SpringLiquibase();
+        liquibase.setChangeLog("classpath:db/liquibase/master.xml");
+        liquibase.setDataSource(dataSource());
+        return liquibase;
     }
 
 }
