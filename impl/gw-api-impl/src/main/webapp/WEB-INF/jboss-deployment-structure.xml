@@ -2,7 +2,7 @@
     <deployment>
         <exclude-subsystems>
             <subsystem name="jaxrs"/>
-            <subsystem name="jpa" />
+            <subsystem name="jpa"/>
             <subsystem name="resteasy"/>
         </exclude-subsystems>
         <exclusions>

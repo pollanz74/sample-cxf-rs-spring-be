@@ -14,7 +14,8 @@ public class SpringWebApplicationInitializer extends AbstractSecurityWebApplicat
                 DataSourceConfig.class,
                 PersistenceConfig.class,
                 LoggingAspectConfig.class,
-                SecurityConfig.class
+                SecurityConfig.class,
+                MetricsConfig.class
         );
     }
 

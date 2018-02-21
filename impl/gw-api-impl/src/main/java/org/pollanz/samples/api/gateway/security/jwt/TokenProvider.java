@@ -3,6 +3,7 @@ package org.pollanz.samples.api.gateway.security.jwt;
 import io.jsonwebtoken.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -15,6 +16,8 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 import java.util.stream.Collectors;
+
+import static org.pollanz.samples.api.gateway.spring.CacheConfig.AUTHENTICATION_CACHE_NAME;
 
 @Slf4j
 public class TokenProvider {
@@ -52,7 +55,9 @@ public class TokenProvider {
                 .compact();
     }
 
+    @Cacheable(AUTHENTICATION_CACHE_NAME)
     public Authentication getAuthentication(String token) {
+        log.info("getAuthentication({})", token);
         Claims claims = Jwts.parser()
                 .setSigningKey(secretKey)
                 .parseClaimsJws(token)
@@ -71,6 +76,7 @@ public class TokenProvider {
     public boolean validateToken(String authToken) {
         try {
             Jwts.parser().setSigningKey(secretKey).parseClaimsJws(authToken);
+            log.info("token {} is valid", authToken);
             return true;
         } catch (SignatureException e) {
             log.info("Invalid JWT signature.");

@@ -1,6 +1,7 @@
 package org.pollanz.samples.api.gateway.spring;
 
 import org.apache.cxf.transport.servlet.CXFServlet;
+import org.pollanz.samples.api.core.spring.MetricsConfig;
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 
 import javax.servlet.ServletContext;
@@ -13,7 +14,8 @@ public class SpringWebApplicationInitializer extends AbstractSecurityWebApplicat
                 SecurityConfig.class,
                 ApplicationConfig.class,
                 AspectConfig.class,
-                CacheConfig.class
+                CacheConfig.class,
+                MetricsConfig.class
         );
     }
 

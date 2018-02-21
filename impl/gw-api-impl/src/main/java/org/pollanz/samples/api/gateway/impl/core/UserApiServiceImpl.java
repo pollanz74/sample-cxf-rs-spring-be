@@ -1,5 +1,6 @@
 package org.pollanz.samples.api.gateway.impl.core;
 
+import com.codahale.metrics.annotation.Timed;
 import org.pollanz.samples.api.gateway.core.UserApi;
 import org.pollanz.samples.api.gateway.core.pojo.JWTToken;
 import org.pollanz.samples.api.gateway.core.pojo.LoginVM;
@@ -20,6 +21,7 @@ public class UserApiServiceImpl implements UserApi {
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    @Timed
     @Override
     public Response authenticate(LoginVM loginVM) {
         UsernamePasswordAuthenticationToken authenticationToken =

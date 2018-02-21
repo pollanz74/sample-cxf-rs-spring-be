@@ -3,25 +3,25 @@
 
 <Configure class="org.eclipse.jetty.webapp.WebAppContext">
     <!--<New id="DSTest" class="org.eclipse.jetty.plus.jndi.Resource">-->
-        <!--<Arg></Arg>-->
-        <!--<Arg>java:jboss/datasources/sampleCoreDS</Arg>-->
-        <!--<Arg>-->
-            <!--<New class="oracle.jdbc.pool.OracleDataSource">-->
-                <!--<Set name="DriverType">thin</Set>-->
-                <!--<Set name="URL">jdbc:oracle:thin:@//{ip addr}:{port number}/{sid}</Set>-->
-                <!--<Set name="User">some-username</Set>-->
-                <!--<Set name="Password">some-password</Set>-->
-                <!--<Set name="connectionCachingEnabled">true</Set>-->
-                <!--<Set name="connectionCacheProperties">-->
-                    <!--<New class="java.util.Properties">-->
-                        <!--<Call name="setProperty">-->
-                            <!--<Arg>MinLimit</Arg>-->
-                            <!--<Arg>5</Arg>-->
-                        <!--</Call>-->
-                        <!--&lt;!&ndash; put the other properties in here too &ndash;&gt;-->
-                    <!--</New>-->
-                <!--</Set>-->
-            <!--</New>-->
-        <!--</Arg>-->
+    <!--<Arg></Arg>-->
+    <!--<Arg>java:jboss/datasources/sampleCoreDS</Arg>-->
+    <!--<Arg>-->
+    <!--<New class="oracle.jdbc.pool.OracleDataSource">-->
+    <!--<Set name="DriverType">thin</Set>-->
+    <!--<Set name="URL">jdbc:oracle:thin:@//{ip addr}:{port number}/{sid}</Set>-->
+    <!--<Set name="User">some-username</Set>-->
+    <!--<Set name="Password">some-password</Set>-->
+    <!--<Set name="connectionCachingEnabled">true</Set>-->
+    <!--<Set name="connectionCacheProperties">-->
+    <!--<New class="java.util.Properties">-->
+    <!--<Call name="setProperty">-->
+    <!--<Arg>MinLimit</Arg>-->
+    <!--<Arg>5</Arg>-->
+    <!--</Call>-->
+    <!--&lt;!&ndash; put the other properties in here too &ndash;&gt;-->
+    <!--</New>-->
+    <!--</Set>-->
+    <!--</New>-->
+    <!--</Arg>-->
     <!--</New>-->
 </Configure>
