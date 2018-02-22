@@ -6,6 +6,8 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.pollanz.samples.api.gateway.core.pojo.LoginVM;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -26,6 +28,6 @@ public interface UserApi {
     @ApiOperation(value = "Authenticate users", tags = {"user",})
     @ApiResponses(value = {
             @ApiResponse(code = 401, message = "authentication failed")})
-    Response authenticate(LoginVM loginVM);
+    Response authenticate(@Valid @NotNull LoginVM loginVM);
 
 }

@@ -10,6 +10,9 @@ import org.apache.cxf.feature.LoggingFeature;
 import org.apache.cxf.jaxrs.JAXRSServerFactoryBean;
 import org.apache.cxf.jaxrs.client.JAXRSClientFactory;
 import org.apache.cxf.jaxrs.swagger.Swagger2Feature;
+import org.apache.cxf.jaxrs.validation.JAXRSBeanValidationInInterceptor;
+import org.apache.cxf.jaxrs.validation.JAXRSBeanValidationOutInterceptor;
+import org.apache.cxf.jaxrs.validation.ValidationExceptionMapper;
 import org.pollanz.samples.api.core.PetApi;
 import org.pollanz.samples.api.gateway.core.UserApi;
 import org.pollanz.samples.api.gateway.core.proxy.PetProxiedApi;
@@ -19,6 +22,7 @@ import org.pollanz.samples.api.gateway.impl.core.proxy.PetProxiedApiServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.core.env.Environment;
 
 import javax.ws.rs.core.MediaType;
@@ -40,6 +44,7 @@ public class ApplicationConfig {
         return new SpringBus();
     }
 
+    @DependsOn("cxf")
     @Bean
     public Server jaxrsServer() {
         JAXRSServerFactoryBean jaxrsServerFactoryBean = new JAXRSServerFactoryBean();
@@ -53,6 +58,8 @@ public class ApplicationConfig {
         jaxrsServerFactoryBean.setExtensionMappings(extensionMappings());
         jaxrsServerFactoryBean.setProviders(providers());
         jaxrsServerFactoryBean.setFeatures(Arrays.asList(loggingFeature(), swagger2Feature()));
+        jaxrsServerFactoryBean.setInInterceptors(Arrays.asList(new JAXRSBeanValidationInInterceptor()));
+        jaxrsServerFactoryBean.setOutInterceptors(Arrays.asList(new JAXRSBeanValidationOutInterceptor()));
         return jaxrsServerFactoryBean.create();
     }
 
@@ -88,7 +95,8 @@ public class ApplicationConfig {
         return Arrays.<Object>asList(
                 new JacksonJaxbJsonProvider(),
                 new SwaggerSerializers(),
-                new GatewayExceptionProvider()
+                new GatewayExceptionProvider(),
+                new ValidationExceptionMapper()
         );
     }
 
