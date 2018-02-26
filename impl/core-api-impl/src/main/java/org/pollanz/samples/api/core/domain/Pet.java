@@ -3,6 +3,7 @@ package org.pollanz.samples.api.core.domain;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.pollanz.samples.api.core.pojo.enumeration.Status;
 
 import javax.persistence.*;
@@ -13,11 +14,11 @@ import java.io.Serializable;
 @EqualsAndHashCode(of = {"id"})
 @Entity
 @Table(name = "PET_TB")
-@SequenceGenerator(name = "pet_sequence", sequenceName = "PET_SEQ")
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Pet implements Serializable {
 
     @Id
-    @GeneratedValue(generator = "pet_sequence")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "NAME", nullable = false, unique = true)

@@ -19,7 +19,7 @@ public class DataSourceConfig {
     @Bean
     public DataSource dataSource() {
         return new EmbeddedDatabaseBuilder()
-                .generateUniqueName(true)
+                .setName("sample-cxf-rs-spring-be-db")
                 .setType(EmbeddedDatabaseType.H2)
                 .build();
     }

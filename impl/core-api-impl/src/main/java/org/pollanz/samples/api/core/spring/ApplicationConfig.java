@@ -50,7 +50,7 @@ public class ApplicationConfig {
         jaxrsServerFactoryBean.setAddress(env.getProperty("sample_core_jaxrsServer_address", "/"));
         jaxrsServerFactoryBean.setServiceBeans(Arrays.<Object>asList(
                 apiListingResource(),
-                widgetApi()
+                petApi()
                 )
         );
         jaxrsServerFactoryBean.setExtensionMappings(extensionMappings());
@@ -67,8 +67,8 @@ public class ApplicationConfig {
 
     public Swagger2Feature swagger2Feature() {
         Swagger2Feature swagger2Feature = new Swagger2Feature();
-        swagger2Feature.setResourcePackage("org.pollanz.samples");
-        swagger2Feature.setBasePath("/core/rest");
+        swagger2Feature.setResourcePackage("org.pollanz.samples.api.core");
+        swagger2Feature.setBasePath("/sample-core/rest");
         swagger2Feature.setVersion(env.getProperty("sample_core_swagger_version", StringUtils.EMPTY));
         swagger2Feature.setTitle(env.getProperty("sample_core_swagger_title", StringUtils.EMPTY));
         swagger2Feature.setDescription(env.getProperty("sample_core_swagger_description", StringUtils.EMPTY));
@@ -104,7 +104,7 @@ public class ApplicationConfig {
     }
 
     @Bean
-    public PetApi widgetApi() {
+    public PetApi petApi() {
         return new PetApiServiceImpl(petService());
     }
 

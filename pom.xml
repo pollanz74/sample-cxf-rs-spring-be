@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.pollanz.samples</groupId>
@@ -10,13 +11,14 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
-		<javax.servlet.version>3.0.1</javax.servlet.version>
+        <javax.servlet.version>3.0.1</javax.servlet.version>
         <spring.platform.bom.version>Brussels-SR5</spring.platform.bom.version>
         <cxf.version>3.1.13</cxf.version>
         <commons-collections.version>4.1</commons-collections.version>
         <jboss-logging.version>3.3.0.Final</jboss-logging.version>
         <jjwt.version>0.9.0</jjwt.version>
         <dropwizard.version>3.1.5</dropwizard.version>
+        <hazelcast-hibernate5.version>1.2.3</hazelcast-hibernate5.version>
     </properties>
 
     <name>Sample REST Backend Application :: ${project.artifactId} (${project.packaging})</name>
@@ -114,6 +116,11 @@
                 <groupId>io.dropwizard.metrics</groupId>
                 <artifactId>metrics-jvm</artifactId>
                 <version>${dropwizard.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.hazelcast</groupId>
+                <artifactId>hazelcast-hibernate5</artifactId>
+                <version>${hazelcast-hibernate5.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

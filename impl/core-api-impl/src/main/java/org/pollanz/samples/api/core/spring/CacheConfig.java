@@ -1,4 +1,4 @@
-package org.pollanz.samples.api.gateway.spring;
+package org.pollanz.samples.api.core.spring;
 
 import com.hazelcast.config.*;
 import com.hazelcast.core.Hazelcast;
@@ -22,8 +22,6 @@ import java.util.List;
 @EnableCaching
 public class CacheConfig {
 
-    public static final String AUTHENTICATION_CACHE_NAME = "Authentication";
-
     @Autowired
     private Environment environment;
 
@@ -43,18 +41,18 @@ public class CacheConfig {
     @Bean
     public HazelcastInstance hazelcastInstance() {
         log.debug("Configuring Hazelcast");
-        HazelcastInstance hazelCastInstance = Hazelcast.getHazelcastInstanceByName("sample-cxf-rs-spring-be-gw");
+        HazelcastInstance hazelCastInstance = Hazelcast.getHazelcastInstanceByName("sample-cxf-rs-spring-be-core");
         if (hazelCastInstance != null) {
             log.debug("Hazelcast already initialized");
             return hazelCastInstance;
         }
         Config config = new Config();
-        config.setInstanceName("sample-cxf-rs-spring-be-gw");
-        config.getNetworkConfig().setPort(environment.getProperty("sample_gateway_cache_network_port", Integer.class, 5701));
-        config.getNetworkConfig().setPortAutoIncrement(environment.getProperty("sample_gateway_cache_network_port_autoIncrement", Boolean.class, Boolean.FALSE));
+        config.setInstanceName("sample-cxf-rs-spring-be-core");
+        config.getNetworkConfig().setPort(environment.getProperty("sample_core_cache_network_port", Integer.class, 5702));
+        config.getNetworkConfig().setPortAutoIncrement(environment.getProperty("sample_core_cache_network_port_autoIncrement", Boolean.class, Boolean.FALSE));
 
         // In development, remove multicast auto-configuration
-        if (environment.getProperty("sample_gateway_cache_localNetwork_enabled", Boolean.class, Boolean.FALSE)) {
+        if (environment.getProperty("sample_core_cache_localNetwork_enabled", Boolean.class, Boolean.FALSE)) {
             System.setProperty("hazelcast.local.localAddress", "127.0.0.1");
             config.getNetworkConfig().getJoin().getAwsConfig().setEnabled(false);
             config.getNetworkConfig().getJoin().getMulticastConfig().setEnabled(false);
@@ -65,7 +63,7 @@ public class CacheConfig {
             config.getNetworkConfig().getJoin().getTcpIpConfig().setMembers(members());
         }
 
-        config.getMapConfigs().put(AUTHENTICATION_CACHE_NAME, initializeDefaultMapConfig());
+//        config.getMapConfigs().put("org.pollanz.samples.api.core.domain.*", initializeDomainMapConfig());
 
         // Full reference is available at: http://docs.hazelcast.org/docs/management-center/3.9/manual/html/Deploying_and_Starting.html
         config.setManagementCenterConfig(initializeDefaultManagementCenterConfig());
@@ -74,9 +72,9 @@ public class CacheConfig {
 
     private ManagementCenterConfig initializeDefaultManagementCenterConfig() {
         ManagementCenterConfig managementCenterConfig = new ManagementCenterConfig();
-        managementCenterConfig.setEnabled(environment.getProperty("sample_gateway_cache_managementCenterConfig_enabled", Boolean.class, Boolean.FALSE));
-        managementCenterConfig.setUrl(environment.getProperty("sample_gateway_cache_managementCenterConfig_url", StringUtils.EMPTY));
-        managementCenterConfig.setUpdateInterval(environment.getProperty("sample_gateway_cache_managementCenterConfig_updateInterval", Integer.class, 3));
+        managementCenterConfig.setEnabled(environment.getProperty("sample_core_cache_managementCenterConfig_enabled", Boolean.class, Boolean.FALSE));
+        managementCenterConfig.setUrl(environment.getProperty("sample_core_cache_managementCenterConfig_url", StringUtils.EMPTY));
+        managementCenterConfig.setUpdateInterval(environment.getProperty("sample_core_cache_managementCenterConfig_updateInterval", Integer.class, 3));
         return managementCenterConfig;
     }
 
@@ -107,13 +105,19 @@ public class CacheConfig {
      */
         mapConfig.setMaxSizeConfig(new MaxSizeConfig(0, MaxSizeConfig.MaxSizePolicy.USED_HEAP_SIZE));
 
-        mapConfig.setTimeToLiveSeconds(environment.getProperty("sample_gateway_cache_default_timeToLiveSeconds", Integer.class, 60));
+        mapConfig.setTimeToLiveSeconds(environment.getProperty("sample_core_cache_default_timeToLiveSeconds", Integer.class, 60));
 
         return mapConfig;
     }
 
+//    private MapConfig initializeDomainMapConfig() {
+//        MapConfig mapConfig = new MapConfig();
+//        mapConfig.setTimeToLiveSeconds(environment.getProperty("sample_core_cache_domain_timeToLiveSeconds", Integer.class, 300));
+//        return mapConfig;
+//    }
+
     private List<String> members() {
-        final String members = environment.getProperty("sample_gateway_cache_members", "127.0.0.1");
+        final String members = environment.getProperty("sample_core_cache_members", "127.0.0.1");
         if (members.contains(":")) {
             throw new IllegalArgumentException("Port must not be set in cache members properties");
         }

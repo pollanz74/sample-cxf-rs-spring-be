@@ -10,10 +10,6 @@
 
     <changeSet id="00000000000001" author="pollanz74">
 
-        <createSequence incrementBy="50"
-                        sequenceName="PET_SEQ"
-                        startValue="1"/>
-
         <createTable tableName="PET_TB">
             <column name="ID" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
