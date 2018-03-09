@@ -17,7 +17,8 @@ public class SpringWebApplicationInitializer extends AbstractSecurityWebApplicat
                 LoggingAspectConfig.class,
                 SecurityConfig.class,
                 MetricsConfig.class,
-                CacheConfig.class
+                CacheConfig.class,
+                CamelConfig.class
         );
     }
 

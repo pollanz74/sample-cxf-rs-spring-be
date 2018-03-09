@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
 import io.swagger.jaxrs.listing.ApiListingResource;
 import io.swagger.jaxrs.listing.SwaggerSerializers;
+import org.apache.camel.ProducerTemplate;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.cxf.bus.spring.SpringBus;
 import org.apache.cxf.endpoint.Server;
@@ -36,6 +37,9 @@ public class ApplicationConfig {
 
     @Autowired
     private Environment env;
+
+    @Autowired
+    private ProducerTemplate producerTemplate;
 
     @Bean(destroyMethod = "shutdown")
     public SpringBus cxf() {
@@ -105,7 +109,7 @@ public class ApplicationConfig {
 
     @Bean
     public PetApi petApi() {
-        return new PetApiServiceImpl(petService());
+        return new PetApiServiceImpl(petService(), producerTemplate);
     }
 
     @Bean

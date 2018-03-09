@@ -19,6 +19,7 @@
         <jjwt.version>0.9.0</jjwt.version>
         <dropwizard.version>3.1.5</dropwizard.version>
         <hazelcast-hibernate5.version>1.2.3</hazelcast-hibernate5.version>
+        <camel.version>2.19.4</camel.version>
     </properties>
 
     <name>Sample REST Backend Application :: ${project.artifactId} (${project.packaging})</name>
@@ -29,6 +30,7 @@
         <module>commons</module>
         <module>api</module>
         <module>impl</module>
+        <module>run-amq</module>
     </modules>
 
     <dependencyManagement>
@@ -121,6 +123,26 @@
                 <groupId>com.hazelcast</groupId>
                 <artifactId>hazelcast-hibernate5</artifactId>
                 <version>${hazelcast-hibernate5.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-core</artifactId>
+                <version>${camel.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-spring</artifactId>
+                <version>${camel.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-jms</artifactId>
+                <version>${camel.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-jackson</artifactId>
+                <version>${camel.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
