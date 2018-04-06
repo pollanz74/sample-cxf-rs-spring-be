@@ -23,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 
 import javax.ws.rs.core.MediaType;
@@ -32,6 +33,7 @@ import java.util.List;
 import java.util.Map;
 
 @Configuration
+@PropertySource(value = "file:///${gw_properties_file}", ignoreResourceNotFound = true)
 public class ApplicationConfig {
 
     private final static String DA_CORE_CONTEXT_PATH = "sample-core/v1";

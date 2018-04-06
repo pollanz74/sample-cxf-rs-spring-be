@@ -12,9 +12,6 @@ import org.springframework.core.env.Environment;
 @EnableAspectJAutoProxy
 public class AspectConfig {
 
-    @Autowired
-    private Environment env;
-
     @Bean
     public LoggingAspect loggingAspect() {
         return new LoggingAspect();

@@ -18,10 +18,7 @@ import org.pollanz.samples.api.core.impl.PetApiServiceImpl;
 import org.pollanz.samples.api.core.service.PetService;
 import org.pollanz.samples.api.core.service.impl.PetServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.DependsOn;
+import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 
 import javax.ws.rs.core.MediaType;
@@ -32,6 +29,7 @@ import java.util.Map;
 
 @Configuration
 @ComponentScan("org.pollanz.samples.api")
+@PropertySource(value = "file:///${core_properties_file}", ignoreResourceNotFound = true)
 public class ApplicationConfig {
 
     @Autowired

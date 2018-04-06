@@ -11,6 +11,7 @@ import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 
 import javax.annotation.PreDestroy;
@@ -20,6 +21,7 @@ import java.util.List;
 @Slf4j
 @Configuration
 @EnableCaching
+@PropertySource(value = "file:///${gw_properties_file}", ignoreResourceNotFound = true)
 public class CacheConfig {
 
     public static final String AUTHENTICATION_CACHE_NAME = "Authentication";

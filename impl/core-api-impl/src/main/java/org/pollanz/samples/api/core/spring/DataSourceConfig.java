@@ -13,9 +13,6 @@ import javax.sql.DataSource;
 @Configuration
 public class DataSourceConfig {
 
-    @Autowired
-    private Environment env;
-
     @Bean
     public DataSource dataSource() {
         return new EmbeddedDatabaseBuilder()
