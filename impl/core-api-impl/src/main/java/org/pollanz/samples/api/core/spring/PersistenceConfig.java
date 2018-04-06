@@ -63,16 +63,16 @@ public class PersistenceConfig {
     @Bean(name = "additionalProperties")
     Properties additionalProperties() {
         Properties properties = new Properties();
-        properties.setProperty("hibernate.hbm2ddl.auto", env.getProperty("sample_core_hibernate_hbm2ddl_auto", StringUtils.EMPTY));
-        properties.setProperty("hibernate.show_sql", env.getProperty("sample_core_hibernate_show_sql", Boolean.FALSE.toString()));
-        properties.setProperty("hibernate.dialect", env.getProperty("sample_core_hibernate_dialect"));
-        properties.setProperty("hibernate.transaction.manager_lookup_class", env.getProperty("sample_core_hibernate_transaction_manager_lookup_class"));
-        properties.setProperty("hibernate.id.new_generator_mappings", env.getProperty("sample_core_hibernate_id_new_generator_mappings", Boolean.TRUE.toString()));
+        properties.setProperty("hibernate.hbm2ddl.auto", env.getProperty("sample.core.hibernate.hbm2ddl.auto", StringUtils.EMPTY));
+        properties.setProperty("hibernate.show_sql", env.getProperty("sample.core.hibernate.show.sql", Boolean.FALSE.toString()));
+        properties.setProperty("hibernate.dialect", env.getProperty("sample.core.hibernate.dialect"));
+        properties.setProperty("hibernate.transaction.manager_lookup_class", env.getProperty("sample.core.hibernate.transaction.manager.lookup.class"));
+        properties.setProperty("hibernate.id.new_generator_mappings", env.getProperty("sample.core.hibernate.id.new.generator.mappings", Boolean.TRUE.toString()));
         properties.setProperty("hibernate.generate_statistics", env.getProperty("sample_core_hibernate_generate_statistics", Boolean.FALSE.toString()));
 
-        if (env.getProperty("sample_core_hibernate_use_second_level_cache", Boolean.class, Boolean.FALSE)) {
+        if (env.getProperty("sample.core.hibernate.use.second.level.cache", Boolean.class, Boolean.FALSE)) {
             log.info("second level cache is enabled");
-            properties.setProperty("hibernate.cache.use_second_level_cache", env.getProperty("sample_core_hibernate_use_second_level_cache"));
+            properties.setProperty("hibernate.cache.use_second_level_cache", env.getProperty("sample.core.hibernate.use.second.level.cache"));
             properties.setProperty("hibernate.cache.use_query_cache", env.getProperty("sample_core_hibernate_use_query_cache", Boolean.FALSE.toString()));
             properties.setProperty("hibernate.cache.region.factory_class", env.getProperty("sample_core_hibernate_cache_region_factory_class", "com.hazelcast.hibernate.HazelcastCacheRegionFactory"));
             properties.setProperty("hibernate.cache.hazelcast.instance_name", env.getProperty("sample_core_hibernate_cache_hazelcast_instance_name", "sample-cxf-rs-spring-be-core"));

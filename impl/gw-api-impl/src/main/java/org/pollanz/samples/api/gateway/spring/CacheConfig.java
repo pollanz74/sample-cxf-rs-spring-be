@@ -56,7 +56,7 @@ public class CacheConfig {
         config.getNetworkConfig().setPortAutoIncrement(environment.getProperty("sample_gateway_cache_network_port_autoIncrement", Boolean.class, Boolean.FALSE));
 
         // In development, remove multicast auto-configuration
-        if (environment.getProperty("sample_gateway_cache_localNetwork_enabled", Boolean.class, Boolean.FALSE)) {
+        if (environment.getProperty("sample.gateway.cache.localNetwork.enabled", Boolean.class, Boolean.FALSE)) {
             System.setProperty("hazelcast.local.localAddress", "127.0.0.1");
             config.getNetworkConfig().getJoin().getAwsConfig().setEnabled(false);
             config.getNetworkConfig().getJoin().getMulticastConfig().setEnabled(false);
@@ -76,8 +76,8 @@ public class CacheConfig {
 
     private ManagementCenterConfig initializeDefaultManagementCenterConfig() {
         ManagementCenterConfig managementCenterConfig = new ManagementCenterConfig();
-        managementCenterConfig.setEnabled(environment.getProperty("sample_gateway_cache_managementCenterConfig_enabled", Boolean.class, Boolean.FALSE));
-        managementCenterConfig.setUrl(environment.getProperty("sample_gateway_cache_managementCenterConfig_url", StringUtils.EMPTY));
+        managementCenterConfig.setEnabled(environment.getProperty("sample.gateway.cache.managementCenterConfig.enabled", Boolean.class, Boolean.FALSE));
+        managementCenterConfig.setUrl(environment.getProperty("sample.gateway.cache.managementCenterConfig.url", StringUtils.EMPTY));
         managementCenterConfig.setUpdateInterval(environment.getProperty("sample_gateway_cache_managementCenterConfig_updateInterval", Integer.class, 3));
         return managementCenterConfig;
     }

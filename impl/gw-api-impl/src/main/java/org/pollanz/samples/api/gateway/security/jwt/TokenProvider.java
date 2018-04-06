@@ -33,9 +33,9 @@ public class TokenProvider {
 
     @PostConstruct
     public void init() {
-        this.secretKey = environment.getProperty("sample_gateway_tokenProvider_secretKey", "secret");
+        this.secretKey = environment.getProperty("sample.gateway.tokenProvider.secretKey", "secret");
 
-        this.tokenValidityInMilliseconds = 1000 * environment.getProperty("sample_gateway_tokenProvider_tokenValidityInMilliseconds", Long.class, 3600000L);
+        this.tokenValidityInMilliseconds = 1000 * environment.getProperty("sample.gateway.tokenProvider.tokenValidityInMilliseconds", Long.class, 3600000L);
     }
 
     public String createToken(Authentication authentication) {

@@ -7,8 +7,12 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.cxf.bus.spring.SpringBus;
 import org.apache.cxf.endpoint.Server;
 import org.apache.cxf.feature.LoggingFeature;
+import org.apache.cxf.interceptor.LoggingInInterceptor;
+import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.apache.cxf.jaxrs.JAXRSServerFactoryBean;
+import org.apache.cxf.jaxrs.client.ClientConfiguration;
 import org.apache.cxf.jaxrs.client.JAXRSClientFactory;
+import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.cxf.jaxrs.swagger.Swagger2Feature;
 import org.apache.cxf.jaxrs.validation.JAXRSBeanValidationInInterceptor;
 import org.apache.cxf.jaxrs.validation.JAXRSBeanValidationOutInterceptor;
@@ -51,7 +55,7 @@ public class ApplicationConfig {
     public Server jaxrsServer() {
         JAXRSServerFactoryBean jaxrsServerFactoryBean = new JAXRSServerFactoryBean();
         jaxrsServerFactoryBean.setBus(cxf());
-        jaxrsServerFactoryBean.setAddress(env.getProperty("sample_gateway_jaxrsServer_address", "/"));
+        jaxrsServerFactoryBean.setAddress(env.getProperty("sample.gateway.jaxrsServer.address", "/"));
         jaxrsServerFactoryBean.setServiceBeans(Arrays.<Object>asList(
                 apiListingResource(),
                 widgetProxyApi(),
@@ -62,6 +66,8 @@ public class ApplicationConfig {
         jaxrsServerFactoryBean.setFeatures(Arrays.asList(loggingFeature(), swagger2Feature()));
         jaxrsServerFactoryBean.setInInterceptors(Arrays.asList(new JAXRSBeanValidationInInterceptor()));
         jaxrsServerFactoryBean.setOutInterceptors(Arrays.asList(new JAXRSBeanValidationOutInterceptor()));
+        jaxrsServerFactoryBean.getInInterceptors().add(new LoggingInInterceptor());
+        jaxrsServerFactoryBean.getOutInterceptors().add(new LoggingOutInterceptor());
         return jaxrsServerFactoryBean.create();
     }
 
@@ -73,9 +79,9 @@ public class ApplicationConfig {
         Swagger2Feature swagger2Feature = new Swagger2Feature();
         swagger2Feature.setResourcePackage("org.pollanz.samples.api.gateway");
         swagger2Feature.setBasePath("/sample-gateway/rest");
-        swagger2Feature.setVersion(env.getProperty("sample_gateway_swagger_version", StringUtils.EMPTY));
-        swagger2Feature.setTitle(env.getProperty("sample_gateway_swagger_title", StringUtils.EMPTY));
-        swagger2Feature.setDescription(env.getProperty("sample_gateway_swagger_description", StringUtils.EMPTY));
+        swagger2Feature.setVersion(env.getProperty("sample.gateway.swagger.version", StringUtils.EMPTY));
+        swagger2Feature.setTitle(env.getProperty("sample.gateway.swagger.title", StringUtils.EMPTY));
+        swagger2Feature.setDescription(env.getProperty("sample.gateway.swagger.description", StringUtils.EMPTY));
         swagger2Feature.setScan(true);
         swagger2Feature.setScanAllResources(true);
         swagger2Feature.setContact(env.getProperty("sample_gateway_swagger_contact", StringUtils.EMPTY));
@@ -103,14 +109,19 @@ public class ApplicationConfig {
     }
 
     private <T> T create(String contextPath, Class<T> clazz) {
-        return JAXRSClientFactory.create(
-                env.getProperty("sample_gateway_jaxrsClient_address").concat(contextPath).concat("/rest/"),
+        T proxy = JAXRSClientFactory.create(
+                env.getProperty("sample.gateway.jaxrsClient.address").concat(contextPath).concat("/rest/"),
                 clazz,
                 providers(),
                 "integration",
                 "password2",
                 null
         );
+
+        ClientConfiguration config = WebClient.getConfig(proxy);
+        config.getInInterceptors().add(new LoggingInInterceptor());
+        config.getOutInterceptors().add(new LoggingOutInterceptor());
+        return proxy;
     }
 
     @Bean

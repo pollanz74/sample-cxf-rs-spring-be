@@ -8,6 +8,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.cxf.bus.spring.SpringBus;
 import org.apache.cxf.endpoint.Server;
 import org.apache.cxf.feature.LoggingFeature;
+import org.apache.cxf.interceptor.LoggingInInterceptor;
+import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.apache.cxf.jaxrs.JAXRSServerFactoryBean;
 import org.apache.cxf.jaxrs.swagger.Swagger2Feature;
 import org.apache.cxf.jaxrs.validation.JAXRSBeanValidationInInterceptor;
@@ -45,7 +47,7 @@ public class ApplicationConfig {
     public Server jaxrsServer() {
         JAXRSServerFactoryBean jaxrsServerFactoryBean = new JAXRSServerFactoryBean();
         jaxrsServerFactoryBean.setBus(cxf());
-        jaxrsServerFactoryBean.setAddress(env.getProperty("sample_core_jaxrsServer_address", "/"));
+        jaxrsServerFactoryBean.setAddress(env.getProperty("sample.core.jaxrsServer.address", "/"));
         jaxrsServerFactoryBean.setServiceBeans(Arrays.<Object>asList(
                 apiListingResource(),
                 petApi()
@@ -56,6 +58,8 @@ public class ApplicationConfig {
         jaxrsServerFactoryBean.setFeatures(Arrays.asList(loggingFeature(), swagger2Feature()));
         jaxrsServerFactoryBean.setInInterceptors(Arrays.asList(new JAXRSBeanValidationInInterceptor()));
         jaxrsServerFactoryBean.setOutInterceptors(Arrays.asList(new JAXRSBeanValidationOutInterceptor()));
+        jaxrsServerFactoryBean.getInInterceptors().add(new LoggingInInterceptor());
+        jaxrsServerFactoryBean.getOutInterceptors().add(new LoggingOutInterceptor());
         return jaxrsServerFactoryBean.create();
     }
 
@@ -67,9 +71,9 @@ public class ApplicationConfig {
         Swagger2Feature swagger2Feature = new Swagger2Feature();
         swagger2Feature.setResourcePackage("org.pollanz.samples.api.core");
         swagger2Feature.setBasePath("/sample-core/rest");
-        swagger2Feature.setVersion(env.getProperty("sample_core_swagger_version", StringUtils.EMPTY));
-        swagger2Feature.setTitle(env.getProperty("sample_core_swagger_title", StringUtils.EMPTY));
-        swagger2Feature.setDescription(env.getProperty("sample_core_swagger_description", StringUtils.EMPTY));
+        swagger2Feature.setVersion(env.getProperty("sample.core.swagger.version", StringUtils.EMPTY));
+        swagger2Feature.setTitle(env.getProperty("sample.core.swagger.title", StringUtils.EMPTY));
+        swagger2Feature.setDescription(env.getProperty("sample.core.swagger.description", StringUtils.EMPTY));
         swagger2Feature.setScan(true);
         swagger2Feature.setScanAllResources(true);
         swagger2Feature.setContact(env.getProperty("sample_core_swagger_contact", StringUtils.EMPTY));
