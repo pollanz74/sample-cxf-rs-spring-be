@@ -1,0 +1,26 @@
+<system-properties>
+    <!-- gw -->
+    <property name="sample_gateway_jaxrsServer_address" value="/"/>
+    <property name="sample_gateway_jaxrsClient_address" value="http://localhost:8080/"/>
+    <property name="sample_gateway_swagger_version" value="1.0.0"/>
+    <property name="sample_gateway_swagger_title" value="Sample External Service"/>
+    <property name="sample_gateway_swagger_description" value="Sample External REST service"/>
+    <property name="sample_gateway_tokenProvider_secretKey" value="secret123"/>
+    <property name="sample_gateway_tokenProvider_tokenValidityInMilliseconds" value="3600000"/>
+    <property name="sample_gateway_cache_localNetwork_enabled" value="true"/>
+    <property name="sample_gateway_cache_managementCenterConfig_enabled" value="false"/>
+
+    <!-- core -->
+    <property name="sample_core_jaxrsServer_address" value="/"/>
+    <property name="sample_core_hibernate_hbm2ddl_auto" value="validate"/>
+    <property name="sample_core_hibernate_show_sql" value="true"/>
+    <property name="sample_core_hibernate_dialect" value="org.hibernate.dialect.H2Dialect"/>
+    <property name="sample_core_hibernate_transaction_manager_lookup_class" value="org.hibernate.transaction.JBossTransactionManagerLookup"/>
+    <property name="sample_core_hibernate_id_new_generator_mappings" value="true"/>
+    <property name="sample_core_hibernate_use_second_level_cache" value="true"/>
+    <property name="sample_core_swagger_version" value="1.0.0"/>
+    <property name="sample_core_swagger_title" value="Sample Service"/>
+    <property name="sample_core_swagger_description" value="Sample REST service"/>
+    <property name="sample_core_cache_localNetwork_enabled" value="true"/>
+    <property name="sample_core_cache_managementCenterConfig_enabled" value="false"/>
+</system-properties>

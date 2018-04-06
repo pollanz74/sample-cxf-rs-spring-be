@@ -29,6 +29,7 @@
         <module>commons</module>
         <module>api</module>
         <module>impl</module>
+        <module>conf</module>
     </modules>
 
     <dependencyManagement>
